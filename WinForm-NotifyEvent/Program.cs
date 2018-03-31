@@ -16,7 +16,23 @@ namespace WinForm_NotifyEvent
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new HideOnStartupApplicationContext(new Form1()));
         }
+        internal class HideOnStartupApplicationContext : ApplicationContext
+        {
+            private Form mainFormInternal;
+
+            public HideOnStartupApplicationContext(Form mainForm)
+            {
+                this.mainFormInternal = mainForm;
+                this.mainFormInternal.FormClosed += new FormClosedEventHandler(mainFormInternal_FormClosed);
+            }
+
+            void mainFormInternal_FormClosed(object sender, FormClosedEventArgs e)
+            {
+                Application.Exit();
+            }
+        }
+
     }
 }

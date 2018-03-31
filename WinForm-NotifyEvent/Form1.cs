@@ -16,5 +16,30 @@ namespace WinForm_NotifyEvent
         {
             InitializeComponent();
         }
+
+        bool isLoaded = false;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            isLoaded = true;
+        }
+
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isLoaded)
+            {
+                notifyIcon1.Dispose();
+                this.Close();
+                Application.Exit();
+            }
+            else
+            {
+                Application.Exit();
+            }
+        }
+
+        private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.notifyIcon1.ShowBalloonTip(1000, "aaa", "bbb", ToolTipIcon.Info);
+        }
     }
 }
